@@ -1,0 +1,1 @@
+docker login # what did you expected?

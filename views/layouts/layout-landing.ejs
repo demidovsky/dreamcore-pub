@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <% /* Certain scripts, normally analytics tools like Google Tag Manager and
+        Google Analytics, should only be included in production: */
+        if (sails.config.environment === 'production') { %>
+        <!-- Google Analytics, Google Tag Manager, etc. -->
+        <% }
+        /* Otherwise, any such scripts are excluded, and we instead inject a
+        robots/noindex meta tag to help prevent any unwanted visits from search engines. */
+        else { %>
+        <meta name="robots" content="noindex">
+        <% } %>
+
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="apple-touch-icon" sizes="180x180" href="landing/favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="landing/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="landing/favicon/favicon-16x16.png">
+        <link rel="manifest" href="landing/favicon/site.webmanifest">
+        <link rel="mask-icon" href="landing/favicon/safari-pinned-tab.svg" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#ffffff">
+        <meta name="theme-color" content="#ffffff">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+        <meta property="og:title" content="Dreamcore">
+        <meta property="og:description" content="Пространство, где мечты превращаются в достижения">
+        <meta property="og:url" content="https://dreamcore.ru">
+        <meta property="og:image" content="landing/favicon/og.jpg">
+
+        <title>Dreamcore</title>
+        <!-- Plugins CSS -->
+        <link href="landing/css/plugins/plugins.css" rel="stylesheet">
+        <!-- load css for cubeportfolio -->
+        <link rel="stylesheet" type="text/css" href="landing/cubeportfolio/css/cubeportfolio.min.css">
+        <link href="landing/css/style.css" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <div id="preloader">
+            <div id="preloader-inner"></div>
+        </div><!--/preloader-->
+
+        <!-- Site Overlay -->
+        <div class="site-overlay"></div>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-transparent navbar--darkimg">
+            <div class="container">
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                 <a class="navbar-brand" href="/">
+
+                    <img class="logo logo-light hidden-md-down" src="landing/images/dreamcore_logo_white.png" width="150px" alt="">
+                </a>
+                <div  id="navbarNavDropdown" class="navbar-collapse collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <!-- <li class="nav-item dropdown"><a href="#" class="nav-link">Home</a></li> -->
+                        <li class="nav-item dropdown"><a href="#project" class="nav-link">Что это?</a></li>
+                        <!-- <li class="nav-item dropdown"><a href="#modules" class="nav-link">Модули</a></li> -->
+                        <li class="nav-item dropdown"><a href="#features" class="nav-link">Как это работает?</a></li>
+                        <!-- <li class="nav-item dropdown"><a href="mailto:me@dimmy.pro" class="nav-link">Contact</a></li> -->
+                        <li class="nav-item dropdown"><a href="/signup" class="nav-link">Регистрация</a></li>
+                        <li class="nav-item d-lg-none d-xl-none"><a href="/login" class="nav-link"><b>Вход</b></a></li>
+                    </ul>
+                </div>
+                <ul class=" navbar-nav ml-auto navbar-right">
+                    <!-- <li class="nav-item"><a href="javascript:void(0)" class=" menu-btn nav-link"><i class="fa fa-dot-circle-o"></i> </a></li> -->
+                    <li class="nav-item"><a href="/login" class=" btn btn-primary btn-rounded btn-sm">Войти</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <%- body %>
+
+        <footer class="footer footer-dark pt50 pb10">
+            <div class="bottom-footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <span>2020 &copy; <a href="https://dimmy.pro">Dimmy.pro</a></span>
+                        </div>
+                        <div class="col-sm-8 text-right">
+                            <ul class="list-inline footer-nav">
+                                <li class="list-inline-item"> <a href="#">В начало</a> </li>
+                                <li class="list-inline-item"> <a href="#project">Что это?</a> </li>
+                                <!-- <li class="list-inline-item"> <a href="#modules">Modules</a> </li> -->
+                                <li class="list-inline-item"> <a href="#features">Как это работает?</a> </li>
+                                <li class="list-inline-item"> <a href="/signup">Регистрация</a> </li>
+                                <li class="list-inline-item"> <a href="/login">Вход</a> </li>
+
+                                <!-- <li class="list-inline-item">
+                                    <a href="#">About</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">News</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">Contact</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#">Terms & Conditions</a>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer><!--/footer-->
+        <!--back to top-->
+        <a href="#" class="back-to-top hidden-xs-down" id="back-to-top"><i class="ti-angle-up"></i></a>
+
+
+<!--SCRIPTS-->
+<script src="/dependencies/sails.io.js"></script>
+<script src="/dependencies/lodash.js"></script>
+<script src="/dependencies/jquery.min.js"></script>
+<script src="/dependencies/vue.js"></script>
+<script src="/dependencies/vue-router.js"></script>
+<script src="/dependencies/bootstrap-4/bootstrap-4.bundle.js"></script>
+<script src="/dependencies/cloud.js"></script>
+<script src="/dependencies/moment.js"></script>
+<script src="/dependencies/parasails.js"></script>
+<script src="/js/cloud.setup.js"></script>
+<script src="/js/components/ajax-button.component.js"></script>
+<script src="/js/components/ajax-form.component.js"></script>
+<script src="/js/components/js-timestamp.component.js"></script>
+<script src="/js/components/modal.component.js"></script>
+<script src="/js/utilities/open-stripe-checkout.js"></script>
+<script src="/js/pages/498.page.js"></script>
+<script src="/js/pages/account/account-overview.page.js"></script>
+<script src="/js/pages/account/edit-password.page.js"></script>
+<script src="/js/pages/account/edit-profile.page.js"></script>
+<script src="/js/pages/contact.page.js"></script>
+<script src="/js/pages/dashboard/welcome.page.js"></script>
+<script src="/js/pages/entrance/confirmed-email.page.js"></script>
+<script src="/js/pages/entrance/forgot-password.page.js"></script>
+<script src="/js/pages/entrance/login.page.js"></script>
+<script src="/js/pages/entrance/new-password.page.js"></script>
+<script src="/js/pages/entrance/signup.page.js"></script>
+<script src="/js/pages/faq.page.js"></script>
+<script src="/js/pages/homepage.page.js"></script>
+<script src="/js/pages/legal/privacy.page.js"></script>
+<script src="/js/pages/legal/terms.page.js"></script>
+<!--SCRIPTS END-->
+
+
+        <!-- jQuery first, then Tether, then Bootstrap JS. -->
+        <script src="https://cdn.jsdelivr.net/gh/cferdinandi/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+        <script type="text/javascript" src="landing/js/plugins/plugins.js"></script>
+        <!-- <script src="landing/js/jquery.particleground.min.js"></script> -->
+        <script type="text/javascript" src="landing/js/assan.custom.js"></script>
+        <!-- load cubeportfolio -->
+        <script type="text/javascript" src="landing/cubeportfolio/js/jquery.cubeportfolio.min.js"></script>
+        <script type="text/javascript" src="landing/js/cube-mosaic.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,3 @@
+[submodule "dreamcore-frontend"]
+	path = dreamcore-frontend
+	url = git@github.com:demidovsky/dreamcore-frontend.git

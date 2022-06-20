@@ -1,0 +1,7 @@
+.git
+node_modules
+.tmp/public/service_worker.js
+*hot-update.js*
+dump.sql
+dreamcore-frontend
+assets

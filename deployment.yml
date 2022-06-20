@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: dreamcore-backend
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: dreamcore-backend
+    spec:
+      containers:
+      - name: dreamcore-backend
+        image: registry.gitlab.com/...../dreamcore-backend
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 1337
+      imagePullSecrets:
+        - name: registry.gitlab.com

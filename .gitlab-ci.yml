@@ -1,0 +1,55 @@
+image: docker:latest
+services:
+  - docker:dind
+
+variables:
+  PROJECT_NAME: dreamcore
+  COMPUTE_ZONE: europe-west4-a
+  INSTANCE: dreamcore-production
+  USERNAME: dmitrydemidovsky
+  # CONTAINER_IMAGE: gcr.io/$CI_PROJECT_PATH
+  CONTAINER_IMAGE: registry.gitlab.com/$CI_PROJECT_PATH
+  DOCKER_DRIVER: overlay2
+
+stages:
+  # - build
+  # - test
+  - package
+  - deploy
+
+# npm-build:
+#   image: node:alpine
+#   stage: build
+#   script:
+#   - npm install --only=production
+#   cache:
+#     key: npm-cache
+#     paths:
+#     - node_modules/
+
+docker-build:
+  stage: package
+  script:
+  # - docker login -u _json_key -p "$GCLOUD_KEY" https://gcr.io
+  - docker -v
+  - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
+  - docker pull $CONTAINER_IMAGE:latest || true
+  - docker build --cache-from $CONTAINER_IMAGE:latest --tag $CONTAINER_IMAGE:$CI_COMMIT_SHA --tag $CONTAINER_IMAGE:latest .
+  - docker push $CONTAINER_IMAGE:$CI_COMMIT_SHA
+  - docker push $CONTAINER_IMAGE:latest
+
+deploy:
+  image: google/cloud-sdk
+  stage: deploy
+  script:
+  - mkdir -p ~/.ssh
+  - echo "$SSH_PRIVATE_KEY" > ~/.ssh/google_compute_engine
+  - echo "$SSH_PUBLIC_KEY" > ~/.ssh/google_compute_engine.pub
+  - chmod 700 ~/.ssh && chmod 644 ~/.ssh/google_compute_engine.pub && chmod 600 ~/.ssh/google_compute_engine
+  - echo "$GCLOUD_KEY" > key.json
+  - gcloud auth activate-service-account --key-file key.json
+  - gcloud config set compute/zone $COMPUTE_ZONE
+  - gcloud config set project $PROJECT_NAME
+  - gcloud compute ssh $USERNAME@$INSTANCE
+    --command='sudo docker login -u gitlab+deploy-token-42896 -p ... registry.gitlab.com && sudo docker-compose pull && sudo docker-compose up -d'
+

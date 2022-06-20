@@ -1,0 +1,59 @@
+version: '3.2'
+services:
+
+  #---------------------- SAILS
+  web:
+    image: docker.io/.../...:latest
+    #image: gcr.io/.../...:latest
+    #image: registry.gitlab.com/.../...:latest
+    restart: always
+    logging:
+      options:
+        max-size: "10M"
+        max-file: "10"
+    environment:
+     - NODE_ENV=production
+     - PORT=443
+    ports:
+     - "80:80"
+     - "443:443"
+    depends_on:
+     - redis
+     - mysql
+    links:
+     - redis:redis
+     - mysql:mysql
+    volumes:
+      - /uploads:/.tmp/uploads
+      #- /etc/letsencrypt/live/dreamcore.ru:/etc/letsencrypt/live/dreamcore.ru
+
+  #---------------------- REDIS
+  redis:
+    image: redis
+    restart: always
+    logging:
+      options:
+        max-size: "10M"
+        max-file: "10"
+
+  #---------------------- MYSQL
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - /root/dreamcore/mysql:/var/lib/mysql
+      - /root/dreamcore/dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    restart: always
+    logging:
+      options:
+        max-size: "10M"
+        max-file: "10"
+    environment:
+      MYSQL_ROOT_PASSWORD: .....
+      MYSQL_DATABASE: dreamcore_db
+      MYSQL_USER: dreamcore_user
+      MYSQL_PASSWORD: .....
+    ports:
+     - "3306:3306"
+
+# volumes:
+#     db_data: {}
